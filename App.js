@@ -2,10 +2,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const parent = React.createElement("div", {id:"parent"},
-React.createElement("div", {id:"child"}, 
-React.createElement("h1", {}, "I'm an h1 Tag")
-));
+
+const jsxHeading = <h1 id="headin">React and Akshay saini is amazing</h1>;
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(parent);
+root.render(jsxHeading);
