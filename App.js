@@ -2,12 +2,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
-const jsxHeading = <h1 id="headin">React and Akshay saini is amazing</h1>;
+const CompositeHeading = () => <h1>This is going to be a composite functional component !</h1>
 
 const FunctionalHeading = () => {
     return (
         <div>
+            <CompositeHeading/>
             <h1>
                 Namaste React fucntional component.🚀
             </h1>
