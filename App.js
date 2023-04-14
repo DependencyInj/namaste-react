@@ -1,26 +1,34 @@
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
+import logo from './assets/logo3.png'
 
-const CompositeHeading = () => <h1>This is going to be a composite functional component !</h1>
-
-const FunctionalHeading = () => {
+const Header = () => {
     return (
-        <>
-            <div>
-                <p>This is a parent</p>
-                <CompositeHeading />
-                <h1>
-                    Namaste React fucntional component.🚀
-                </h1>
+        <div className='header'>
+            <div className='logo-container'>
+                <img className='logo' src={logo} />
             </div>
-            <>
-            <h1>Fragment inside a fragment</h1>
-            </>
-            <div>This is another parent</div>
-        </>
+            <div className='nav-items'>
+                <ul>
+                    <li>Home</li>
+                    <li>About</li>  
+                    <li>Contact Us</li>  
+                    <li>Cart</li>
+                </ul>
+            </div>
+        </div>
+    )
+}
+
+
+const AppLayout = () => {
+    return (
+        <div className='app'>
+            <Header/>
+        </div>
     )
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<FunctionalHeading />);
+root.render(<AppLayout />);
