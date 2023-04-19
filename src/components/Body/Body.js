@@ -2,7 +2,7 @@ import './Body.css';
 import RestaurentCard from '../Card/Card';
 import resList from '../../utils/restaurantListData';
 import topRatedIcon from '../../../assets/best-seller.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Body = () => {
     const [listOfres, setListOfRes] = useState(resList);
@@ -17,6 +17,16 @@ const Body = () => {
 
     const filterTopRated = () => {
         setListOfRes(listOfres.filter(item => item.data.avgRating > 4));
+    }
+
+    useEffect(() => {
+        getRestaurents();
+    }, []);
+
+    async function getRestaurents(){
+        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=10.0158605&lng=76.3418666&page_type=DESKTOP_WEB_LISTING");
+        const json = await data.json();
+        console.log(json);
     }
     return (
         <div className='body'>
