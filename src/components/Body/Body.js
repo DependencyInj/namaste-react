@@ -3,6 +3,7 @@ import RestaurentCard from '../Card/Card';
 import topRatedIcon from '../../../assets/best-seller.png';
 import { useEffect, useState } from 'react';
 import ShimmerCards from '../loaders/ShimmerLoader/ShimmerLoader';
+import { SWIGGY_RES_URL } from '../../utils/constants';
 
 const Body = () => {
     const [listOfres, setListOfRes] = useState([]);
@@ -25,7 +26,7 @@ const Body = () => {
     }, []);
 
     async function getRestaurents(){
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=10.0158605&lng=76.3418666&page_type=DESKTOP_WEB_LISTING");
+        const data = await fetch(SWIGGY_RES_URL);
         const json = await data.json();
         console.log(json);
         setListOfRes(json.data.cards[2].data.data.cards);
