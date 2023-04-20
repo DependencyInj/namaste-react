@@ -1,8 +1,8 @@
-import { createRef, useLayoutEffect } from "react";
+import { createRef, useLayoutEffect, useRef } from "react";
 
 const Shimmer = (loading) => {
 
-    const ref = createRef();
+    const ref = useRef();
 
     useLayoutEffect(() => {
         if(ref.current){

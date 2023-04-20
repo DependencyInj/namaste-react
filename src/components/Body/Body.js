@@ -6,17 +6,18 @@ import ShimmerCards from '../loaders/ShimmerLoader/ShimmerLoader';
 
 const Body = () => {
     const [listOfres, setListOfRes] = useState([]);
+    const [listOfresFiltered, setListOfResFiltered] = useState([]);
     const [searchText, setSearchText] = useState("");
 
     const search = () => {
-        setListOfRes(listOfres
+        setListOfResFiltered(listOfres
             .filter(item => item.data.name
                 .toLowerCase()
                 .indexOf(searchText.toLowerCase()) > -1));
     }
 
     const filterTopRated = () => {
-        setListOfRes(listOfres.filter(item => item.data.avgRating > 4));
+        setListOfResFiltered(listOfres.filter(item => item.data.avgRating > 4));
     }
 
     useEffect(() => {
@@ -28,6 +29,7 @@ const Body = () => {
         const json = await data.json();
         console.log(json);
         setListOfRes(json.data.cards[2].data.data.cards);
+        setListOfResFiltered(json.data.cards[2].data.data.cards);
     }
     return (
         <div className='body'>
@@ -43,7 +45,7 @@ const Body = () => {
             </div>
             <div className='res-container' >
                 {
-                   listOfres.length? listOfres.map(res => <RestaurentCard loading = {!listOfres.length} key={res.data.id} resData={res} />) : 
+                   listOfresFiltered.length? listOfresFiltered.map(res => <RestaurentCard loading = {!listOfres.length} key={res.data.id} resData={res} />) : 
                    [...Array(10)].map((item, index) => <ShimmerCards loading = {true} key={index}  />)
                 }
             </div>
