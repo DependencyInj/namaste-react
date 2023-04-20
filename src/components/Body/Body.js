@@ -1,11 +1,11 @@
 import './Body.css';
 import RestaurentCard from '../Card/Card';
-import resList from '../../utils/restaurantListData';
 import topRatedIcon from '../../../assets/best-seller.png';
 import { useEffect, useState } from 'react';
+import ShimmerCards from '../loaders/ShimmerLoader/ShimmerLoader';
 
 const Body = () => {
-    const [listOfres, setListOfRes] = useState(resList);
+    const [listOfres, setListOfRes] = useState([]);
     const [searchText, setSearchText] = useState("");
 
     const search = () => {
@@ -27,6 +27,7 @@ const Body = () => {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=10.0158605&lng=76.3418666&page_type=DESKTOP_WEB_LISTING");
         const json = await data.json();
         console.log(json);
+        setListOfRes(json.data.cards[2].data.data.cards);
     }
     return (
         <div className='body'>
@@ -40,9 +41,10 @@ const Body = () => {
                     <button onClick={() => search()} className='search-button'>Search</button>
                 </div>
             </div>
-            <div className='res-container'>
+            <div className='res-container' >
                 {
-                    listOfres.map(res => <RestaurentCard key={res.data.id} resData={res} />)
+                   listOfres.length? listOfres.map(res => <RestaurentCard loading = {!listOfres.length} key={res.data.id} resData={res} />) : 
+                   [...Array(10)].map((item, index) => <ShimmerCards loading = {true} key={index}  />)
                 }
             </div>
         </div>
