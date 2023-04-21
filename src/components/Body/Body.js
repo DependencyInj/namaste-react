@@ -25,13 +25,14 @@ const Body = () => {
         getRestaurents();
     }, []);
 
-    async function getRestaurents(){
+    async function getRestaurents() {
         const data = await fetch(SWIGGY_RES_URL);
         const json = await data.json();
         console.log(json);
         setListOfRes(json.data.cards[2].data.data.cards);
         setListOfResFiltered(json.data.cards[2].data.data.cards);
     }
+
     return (
         <div className='body'>
             <div>
@@ -44,11 +45,15 @@ const Body = () => {
                     <button onClick={() => search()} className='search-button'>Search</button>
                 </div>
             </div>
+
             <div className='res-container' >
                 {
-                   listOfresFiltered.length? listOfresFiltered.map(res => <RestaurentCard loading = {!listOfres.length} key={res.data.id} resData={res} />) : 
-                   [...Array(10)].map((item, index) => <ShimmerCards loading = {true} key={index}  />)
+                    (listOfres.length && !listOfresFiltered.length) ?
+                        (<h1>No item matches this search!!</h1>) :
+                        (listOfresFiltered.length ? listOfresFiltered.map(res => <RestaurentCard loading={!listOfres.length} key={res.data.id} resData={res} />) :
+                            [...Array(10)].map((item, index) => <ShimmerCards loading={true} key={index} />))
                 }
+
             </div>
         </div>
     )
