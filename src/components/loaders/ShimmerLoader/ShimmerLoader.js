@@ -2,14 +2,22 @@ import Shimmer from '../Shimmer/Shimmer';
 import './ShimmerLoader.css';
 
 const ShimmerCards = (props) => {
-    const ref  = Shimmer(props.loading);
+    const ref = [...Array(10)].map(()=> Shimmer(props.loading));
     return (
-        <div className='card' ref={ref}>
-            <div data-loading className='res-logo'>''</div>
-            <h3 data-loading>''</h3>
-            <h5 data-loading>''</h5>
-            <h5 data-loading>''</h5>
-        </div>
+        <>
+            {
+                [...Array(10)].map((item, index) =>
+                    <div key={index} ref={ref[index]}>
+                        <div  className='card' >
+                            <div data-loading className='res-logo'>''</div>
+                            <h3 data-loading>''</h3>
+                            <h5 data-loading>''</h5>
+                            <h5 data-loading>''</h5>
+                        </div>
+                    </div>
+                )
+            }
+        </>
     );
 }
 

@@ -50,8 +50,10 @@ const Body = () => {
                 {
                     (listOfres.length && !listOfresFiltered.length) ?
                         (<h1>No item matches this search!!</h1>) :
-                        (listOfresFiltered.length ? listOfresFiltered.map(res => <RestaurentCard loading={!listOfres.length} key={res.data.id} resData={res} />) :
-                            [...Array(10)].map((item, index) => <ShimmerCards loading={true} key={index} />))
+                        (listOfresFiltered.length ?
+                            listOfresFiltered.map(res => <RestaurentCard loading={!listOfres.length} key={res.data.id} resData={res} />) :
+                            <ShimmerCards loading={true} />
+                        )
                 }
 
             </div>
