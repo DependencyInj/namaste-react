@@ -19,7 +19,7 @@
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     display: flex;
-    padding: 30px 20px 10px 0px;
+    padding: 10px 20px 10px 0px;
     max-width: 800px;
 }
 
@@ -27,6 +27,7 @@
     display: flex;
     flex-direction: column;
     margin-left: 10px;
+    width: 600px;
 }
 
 .price,
@@ -49,4 +50,19 @@
 
 .best-seller{
     color: orange;
+}
+
+.menu-item-shimmer {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    display: flex;
+    padding: 10px 20px 10px 0px;
+    /* width: 800px; */
+    min-width: 800px;
+}
+
+.content-box{
+    margin-left:10px ;
+    width: 600px;
+    height: 150px;
 }

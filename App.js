@@ -8,6 +8,7 @@ import AboutUs from './src/components/AboutUs/AboutUs';
 import Error from './src/components/Error/Error';
 import Contact from './src/components/Contact/Contact';
 import RestaurentMenu from './src/components/RestaurentMenu/RestaurentMenu';
+import ShimmerMenuItem from './src/components/loaders/ShimmerMenuItem/ShimmerMenuItem';
 
 
 export default AppLayout = () => {
