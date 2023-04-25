@@ -5,7 +5,7 @@ const AboutUs = () => {
         <div>
             <h1>About Us</h1>
             <div>This is a food orderng app sample about page.</div>
-            <Profile />
+            <Profile name="Harikrishnan Soman" />
         </div>
     )
 }
