@@ -9,8 +9,6 @@ const RestaurentMenu = () => {
     const [restaurentData, setRestaurentData] = useState({});
     const [restaurentMenu, setRestaurentMenu] = useState([]);
 
-    console.log(params)
-
     useEffect(() => {
         getMenu();
     }, []);
@@ -21,7 +19,6 @@ const RestaurentMenu = () => {
         const menu = await data.json();
         setRestaurentData(menu.data.cards[0].card.card.info);
         setRestaurentMenu(menu?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards);
-        console.log(menu?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards);
     }
 
     return (
@@ -47,7 +44,7 @@ const RestaurentMenu = () => {
                                             <div className="best-seller">Best seller</div> : ""
                                     }
                                     <h4 className="item-name">{info.name}</h4>
-                                    <h5 className="price">{info.price/100}</h5>
+                                    <h5 className="price">{info.price / 100}</h5>
                                     <p className="item-details">{info.description}</p>
                                 </div>
                             </div>)
