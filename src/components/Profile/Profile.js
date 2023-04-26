@@ -8,9 +8,16 @@ class Profile extends React.Component {
         this.state = {
             count: 0
         }
+
+        console.log("Constructing Profile");
     }
 
+    componentDidMount() {
+        console.log("Mounting Profile...");
+    }
+    
     render() {
+        console.log("Rendering Profile...");
         return (
             <div>
                 <h1>Profile of {this.props.name}</h1>
