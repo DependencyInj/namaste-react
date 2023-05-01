@@ -9,7 +9,7 @@ const RestaurentMenu = () => {
     const params = useParams();
     const restaurent = useRestaurent(params.id);
     const restaurentData = restaurent?.data?.cards[0]?.card?.card?.info;
-    const restaurentMenu = restaurent?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards);
+    const restaurentMenu = restaurent?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards;
 
     return (
         <div className="menu-container">
