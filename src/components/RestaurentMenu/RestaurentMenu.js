@@ -3,33 +3,23 @@ import { useParams } from "react-router-dom";
 import './RestaurentMenu.css';
 import { CDN_URL } from "../../utils/constants";
 import ShimmerMenuItem from "../loaders/ShimmerMenuItem/ShimmerMenuItem";
+import useRestaurent from "../../hooks/useRestaurent";
 
 const RestaurentMenu = () => {
     const params = useParams();
-    const [restaurentData, setRestaurentData] = useState({});
-    const [restaurentMenu, setRestaurentMenu] = useState([]);
-
-    useEffect(() => {
-        getMenu();
-    }, []);
-
-    async function getMenu() {
-        const data = await
-            fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=10.0158605&lng=76.3418666&restaurantId=${params.id}&submitAction=ENTER`);
-        const menu = await data.json();
-        setRestaurentData(menu.data.cards[0].card.card.info);
-        setRestaurentMenu(menu?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards);
-    }
+    const restaurent = useRestaurent(params.id);
+    const restaurentData = restaurent?.data?.cards[0]?.card?.card?.info;
+    const restaurentMenu = restaurent?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards);
 
     return (
         <div className="menu-container">
             <div className="restaurent-details">
-                <h3 className="restaurent-name">{restaurentData.name}</h3>
-                <h4 className="restaurent-rating">{restaurentData.avgRatingString} Stars</h4>
+                <h3 className="restaurent-name">{restaurentData?.name}</h3>
+                <h4 className="restaurent-rating">{restaurentData?.avgRatingString} Stars</h4>
                 <p className="restaurent-cuisines">{restaurentData?.cuisines?.join(', ')}</p>
             </div>
             {
-                !restaurentMenu.length ?
+                !restaurentMenu ?
                     <ShimmerMenuItem />
                     :
                     restaurentMenu?.map((item, index) => {
