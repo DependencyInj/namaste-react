@@ -36,33 +36,35 @@ const Body = () => {
         setListOfResFiltered(json.data.cards[2].data.data.cards);
     }
 
+    if (!isOnline) {
+        return <h1>You are offline</h1>
+    }
+
     return (
-        !isOnline ? <h1>You are offline</h1> : (
-            <div className='body'>
-                <div>
-                    <button onClick={filterTopRated} className='top-rate-btn'>
-                        <img className='top-rated-icon' src={topRatedIcon} />
-                        Top rated
-                    </button>
-                    <div className='search-container'>
-                        <input onChange={(event) => setSearchText(event.target.value)} value={searchText} className='search-text' />
-                        <button onClick={() => search()} className='search-button'>Search</button>
-                    </div>
-                </div>
-
-                <div className='res-container' >
-                    {
-                        (listOfres.length && !listOfresFiltered.length) ?
-                            (<h1>No item matches this search!!</h1>) :
-                            (listOfresFiltered.length ?
-                                listOfresFiltered.map(res => <RestaurentCard loading={!listOfres.length} key={res.data.id} resData={res} />) :
-                                <ShimmerCards loading={true} />
-                            )
-                    }
-
+        <div className='body'>
+            <div>
+                <button onClick={filterTopRated} className='top-rate-btn'>
+                    <img className='top-rated-icon' src={topRatedIcon} />
+                    Top rated
+                </button>
+                <div className='search-container'>
+                    <input onChange={(event) => setSearchText(event.target.value)} value={searchText} className='search-text' />
+                    <button onClick={() => search()} className='search-button'>Search</button>
                 </div>
             </div>
-        ))
+
+            <div className='res-container' >
+                {
+                    (listOfres.length && !listOfresFiltered.length) ?
+                        (<h1>No item matches this search!!</h1>) :
+                        (listOfresFiltered.length ?
+                            listOfresFiltered.map(res => <RestaurentCard loading={!listOfres.length} key={res.data.id} resData={res} />) :
+                            <ShimmerCards loading={true} />
+                        )
+                }
+            </div>
+        </div>
+    )
 }
 
 export default Body;

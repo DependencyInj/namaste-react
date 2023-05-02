@@ -1,52 +1,61 @@
 
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import Header from './src/components/Header/Header';
-import Body from './src/components/Body/Body';
-import { RouterProvider, createBrowserRouter, Outlet} from 'react-router-dom';
-import AboutUs from './src/components/AboutUs/AboutUs';
+import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
 import Error from './src/components/Error/Error';
-import Contact from './src/components/Contact/Contact';
 import RestaurentMenu from './src/components/RestaurentMenu/RestaurentMenu';
-import ShimmerMenuItem from './src/components/loaders/ShimmerMenuItem/ShimmerMenuItem';
 
+
+const Body = lazy(() => import("./src/components/Body/Body"));
+const AboutUs = lazy(() => import("./src/components/AboutUs/AboutUs"));
+const Contact = lazy(() => import("./src/components/Contact/Contact"))
 
 export default AppLayout = () => {
     return (
         <div className='app'>
             <Header />
-            <Outlet/>
+            <Outlet />
         </div>
     )
 }
 
 const appRouter = createBrowserRouter([
     {
-        path:'/',
+        path: '/',
         element: <AppLayout />,
         errorElement: <Error />,
         children: [
             {
-                path:'/',
-                element: <Body/>
+                path: '/',
+                element:
+                    <Suspense>
+                        <Body />
+                    </Suspense>
             },
             {
-                path:'/about',
-                element: <AboutUs />
+                path: '/about',
+                element:
+                    <Suspense>
+                        <AboutUs />
+                    </Suspense>
             },
             {
-                path:'/contact',
-                element: <Contact/>
+                path: '/contact',
+                element:
+                    <Suspense>
+                        <Contact />
+                    </Suspense>
             },
             {
-                path:'/restaurent/:id',
+                path: '/restaurent/:id',
                 element: <RestaurentMenu />
             }
         ]
     },
-    
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider  router={appRouter}/>);
+root.render(<RouterProvider router={appRouter} />);
 
