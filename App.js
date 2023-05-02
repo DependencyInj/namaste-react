@@ -5,7 +5,7 @@ import Header from './src/components/Header/Header';
 import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
 import Error from './src/components/Error/Error';
 import RestaurentMenu from './src/components/RestaurentMenu/RestaurentMenu';
-
+import ShimmerCards from "./src/components/loaders/ShimmerLoader/ShimmerLoader";
 
 const Body = lazy(() => import("./src/components/Body/Body"));
 const AboutUs = lazy(() => import("./src/components/AboutUs/AboutUs"));
@@ -29,7 +29,7 @@ const appRouter = createBrowserRouter([
             {
                 path: '/',
                 element:
-                    <Suspense>
+                    <Suspense fallback={<ShimmerCards/>}>
                         <Body />
                     </Suspense>
             },
