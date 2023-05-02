@@ -5,18 +5,21 @@ const useIsOnline = () => {
     const [isOnline, setIsOnline] = useState(true);
 
     useEffect(() => {
-        window.addEventListener("online", () => {
-            setIsOnline(true);
-            console.log("online");
-        });
 
-        window.addEventListener("offline", () => {
+        const handleOnline = () => {
+            setIsOnline(true);
+        }
+
+        const handleOffline = () => {
             setIsOnline(false);
-            console.log("offline");
-        });
+        }
+
+        window.addEventListener("online", handleOnline);
+        window.addEventListener("offline", handleOffline);
 
         return () => {
-
+            window.removeEventListener("online", handleOnline);
+            window.removeEventListener("offline", handleOffline);
         };
 
     }, []);
