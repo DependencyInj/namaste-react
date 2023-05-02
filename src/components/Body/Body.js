@@ -4,11 +4,14 @@ import topRatedIcon from '../../../assets/best-seller.png';
 import { useEffect, useState } from 'react';
 import ShimmerCards from '../loaders/ShimmerLoader/ShimmerLoader';
 import { SWIGGY_RES_URL } from '../../utils/constants';
+import useIsOnline from '../../hooks/useIsOnline';
 
 const Body = () => {
     const [listOfres, setListOfRes] = useState([]);
     const [listOfresFiltered, setListOfResFiltered] = useState([]);
     const [searchText, setSearchText] = useState("");
+
+    const isOnline = useIsOnline();
 
     const search = () => {
         setListOfResFiltered(listOfres
@@ -34,31 +37,32 @@ const Body = () => {
     }
 
     return (
-        <div className='body'>
-            <div>
-                <button onClick={filterTopRated} className='top-rate-btn'>
-                    <img className='top-rated-icon' src={topRatedIcon} />
-                    Top rated
-                </button>
-                <div className='search-container'>
-                    <input onChange={(event) => setSearchText(event.target.value)} value={searchText} className='search-text' />
-                    <button onClick={() => search()} className='search-button'>Search</button>
+        !isOnline ? <h1>You are offline</h1> : (
+            <div className='body'>
+                <div>
+                    <button onClick={filterTopRated} className='top-rate-btn'>
+                        <img className='top-rated-icon' src={topRatedIcon} />
+                        Top rated
+                    </button>
+                    <div className='search-container'>
+                        <input onChange={(event) => setSearchText(event.target.value)} value={searchText} className='search-text' />
+                        <button onClick={() => search()} className='search-button'>Search</button>
+                    </div>
+                </div>
+
+                <div className='res-container' >
+                    {
+                        (listOfres.length && !listOfresFiltered.length) ?
+                            (<h1>No item matches this search!!</h1>) :
+                            (listOfresFiltered.length ?
+                                listOfresFiltered.map(res => <RestaurentCard loading={!listOfres.length} key={res.data.id} resData={res} />) :
+                                <ShimmerCards loading={true} />
+                            )
+                    }
+
                 </div>
             </div>
-
-            <div className='res-container' >
-                {
-                    (listOfres.length && !listOfresFiltered.length) ?
-                        (<h1>No item matches this search!!</h1>) :
-                        (listOfresFiltered.length ?
-                            listOfresFiltered.map(res => <RestaurentCard loading={!listOfres.length} key={res.data.id} resData={res} />) :
-                            <ShimmerCards loading={true} />
-                        )
-                }
-
-            </div>
-        </div>
-    )
+        ))
 }
 
 export default Body;
