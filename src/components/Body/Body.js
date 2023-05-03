@@ -1,16 +1,14 @@
 import './Body.css';
 import RestaurentCard from '../Card/Card';
 import topRatedIcon from '../../../assets/best-seller.png';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ShimmerCards from '../loaders/ShimmerLoader/ShimmerLoader';
-import { SWIGGY_RES_URL } from '../../utils/constants';
 import useIsOnline from '../../hooks/useIsOnline';
+import useListOfRestaurents from '../../hooks/useListOfRestaurents';
 
 const Body = () => {
-    const [listOfres, setListOfRes] = useState([]);
-    const [listOfresFiltered, setListOfResFiltered] = useState([]);
     const [searchText, setSearchText] = useState("");
-
+    const [listOfres, listOfresFiltered, setListOfResFiltered] = useListOfRestaurents();
     const isOnline = useIsOnline();
 
     const search = () => {
@@ -23,18 +21,7 @@ const Body = () => {
     const filterTopRated = () => {
         setListOfResFiltered(listOfres.filter(item => item.data.avgRating > 4));
     }
-
-    useEffect(() => {
-        getRestaurents();
-    }, []);
-
-    async function getRestaurents() {
-        const data = await fetch(SWIGGY_RES_URL);
-        const json = await data.json();
-        console.log(json);
-        setListOfRes(json.data.cards[2].data.data.cards);
-        setListOfResFiltered(json.data.cards[2].data.data.cards);
-    }
+    
 
     if (!isOnline) {
         return <h1>You are offline</h1>
