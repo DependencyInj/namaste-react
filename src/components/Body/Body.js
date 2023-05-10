@@ -28,7 +28,7 @@ const Body = () => {
     }
 
     return (
-        <div className='body'>
+        <div className='body bg-green-50'>
             <div>
                 <button onClick={filterTopRated} className='top-rate-btn'>
                     <img className='top-rated-icon' src={topRatedIcon} />
@@ -40,7 +40,7 @@ const Body = () => {
                 </div>
             </div>
 
-            <div className='res-container' >
+            <div className='flex flex-wrap' >
                 {
                     (listOfres.length && !listOfresFiltered.length) ?
                         (<h1>No item matches this search!!</h1>) :
