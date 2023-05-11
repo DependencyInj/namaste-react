@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
 import Error from './src/components/Error/Error';
 import RestaurentMenu from './src/components/RestaurentMenu/RestaurentMenu';
 import ShimmerCards from "./src/components/loaders/ShimmerLoader/ShimmerLoader";
+import InstaMart from './src/components/InstaMart/InstaMart';
 
 const Body = lazy(() => import("./src/components/Body/Body"));
 const AboutUs = lazy(() => import("./src/components/AboutUs/AboutUs"));
@@ -50,7 +51,11 @@ const appRouter = createBrowserRouter([
             {
                 path: '/restaurent/:id',
                 element: <RestaurentMenu />
-            }
+            },
+            {
+                path: '/instamart',
+                element: <InstaMart />
+            },
         ]
     },
 

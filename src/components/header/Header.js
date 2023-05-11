@@ -21,6 +21,11 @@ const Header = () => {
                         <Link to="/contact">Contact</Link>
                     </li>
                     <li className='px-2'>Cart</li>
+                    <li className='px-2'>
+                        <Link to='/instamart'>
+                            InstaMart
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </div>
