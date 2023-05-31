@@ -22,7 +22,11 @@ const Header = () => {
                     <li className='px-2'>
                         <Link to="/contact">Contact</Link>
                     </li>
-                    <li className='px-2'>Cart({items.length})</li>
+                    <li className='px-2'>
+                        <Link to="/cart">
+                            Cart({items.length})
+                        </Link>
+                    </li>
                     <li className='px-2'>
                         <Link to='/instamart'>
                             InstaMart

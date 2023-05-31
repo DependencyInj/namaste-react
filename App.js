@@ -12,7 +12,8 @@ import store from './src/utils/store';
 
 const Body = lazy(() => import("./src/components/Body/Body"));
 const AboutUs = lazy(() => import("./src/components/AboutUs/AboutUs"));
-const Contact = lazy(() => import("./src/components/Contact/Contact"))
+const Contact = lazy(() => import("./src/components/Contact/Contact"));
+const Cart = lazy(() => import('./src/components/Cart/Cart'));
 
 export default AppLayout = () => {
     return (
@@ -60,6 +61,12 @@ const appRouter = createBrowserRouter([
                 path: '/instamart',
                 element: <InstaMart />
             },
+            {
+                path: '/cart',
+                element: <Suspense>
+                    <Cart/>
+                </Suspense>
+            }
         ]
     },
 
