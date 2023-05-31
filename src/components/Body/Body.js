@@ -5,11 +5,14 @@ import { useState } from 'react';
 import ShimmerCards from '../loaders/ShimmerLoader/ShimmerLoader';
 import useIsOnline from '../../hooks/useIsOnline';
 import useListOfRestaurents from '../../hooks/useListOfRestaurents';
+import { addItem } from '../../slices/CartSlice';
+import { useDispatch } from 'react-redux';
 
 const Body = () => {
     const [searchText, setSearchText] = useState("");
     const [listOfres, listOfresFiltered, setListOfResFiltered] = useListOfRestaurents();
     const isOnline = useIsOnline();
+    const dispatch = useDispatch();
 
     const search = () => {
         setListOfResFiltered(listOfres
@@ -26,9 +29,12 @@ const Body = () => {
     if (!isOnline) {
         return <h1>You are offline</h1>
     }
-
+    const addGrape = () => {
+        dispatch(addItem('grapes'));
+    }
     return (
         <div className='body bg-green-50'>
+            <button onClick={() => addGrape()} className='bg-red-200 rounded-sm mt-3'>Add grapes</button>
             <div>
                 <button onClick={filterTopRated} className='top-rate-btn'>
                     <img className='top-rated-icon' src={topRatedIcon} />

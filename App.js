@@ -7,6 +7,8 @@ import Error from './src/components/Error/Error';
 import RestaurentMenu from './src/components/RestaurentMenu/RestaurentMenu';
 import ShimmerCards from "./src/components/loaders/ShimmerLoader/ShimmerLoader";
 import InstaMart from './src/components/InstaMart/InstaMart';
+import { Provider } from 'react-redux';
+import store from './src/utils/store';
 
 const Body = lazy(() => import("./src/components/Body/Body"));
 const AboutUs = lazy(() => import("./src/components/AboutUs/AboutUs"));
@@ -14,10 +16,12 @@ const Contact = lazy(() => import("./src/components/Contact/Contact"))
 
 export default AppLayout = () => {
     return (
-        <div className='app'>
-            <Header />
-            <Outlet />
-        </div>
+        <Provider store={store}>
+            <div className='app'>
+                <Header />
+                <Outlet />
+            </div>
+        </Provider>
     )
 }
 
@@ -30,7 +34,7 @@ const appRouter = createBrowserRouter([
             {
                 path: '/',
                 element:
-                    <Suspense fallback={<ShimmerCards/>}>
+                    <Suspense fallback={<ShimmerCards />}>
                         <Body />
                     </Suspense>
             },

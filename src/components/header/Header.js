@@ -1,9 +1,11 @@
 import './Header.css'
 import logo from '../../../assets/logo3.png';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 const Header = () => {
+    const items = useSelector(state => state.cart.items);
     return (
         <div className='header bg-green-50 shadow-xl'>
             <div className='logo-container'>
@@ -20,7 +22,7 @@ const Header = () => {
                     <li className='px-2'>
                         <Link to="/contact">Contact</Link>
                     </li>
-                    <li className='px-2'>Cart</li>
+                    <li className='px-2'>Cart({items.length})</li>
                     <li className='px-2'>
                         <Link to='/instamart'>
                             InstaMart
