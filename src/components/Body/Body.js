@@ -32,6 +32,7 @@ const Body = () => {
     const addGrape = () => {
         dispatch(addItem('grapes'));
     }
+    
     return (
         <div className='body bg-green-50'>
             <button onClick={() => addGrape()} className='bg-red-200 rounded-sm mt-3'>Add grapes</button>
